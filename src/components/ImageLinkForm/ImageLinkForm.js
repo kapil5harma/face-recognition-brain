@@ -5,7 +5,7 @@ const ImageLink = props => {
   return (
     <div className="">
       <p className="f3">
-        {'This magic brain will detect faces in your image.'}
+        {'This magic brain will detect faces in your pictures. Give it a try.'}
       </p>
       <div className="flex-center">
         <div className="flex-center form pa4 br3 shadow-5">
