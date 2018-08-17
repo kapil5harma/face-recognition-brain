@@ -36,22 +36,23 @@ class App extends Component {
   };
 
   onButtonSubmit = () => {
-    this.setState({ imageURL: this.state.input });
-    app.models
-      .predict(
-        Clarifai.COLOR_MODEL,
-        'https://static.photocdn.pt/images/articles/2017/03/15/iStock-539001578.jpg'
-      )
-      .then(
-        function(response) {
-          console.log('response: ', response);
-          // do something with response
-        },
-        function(err) {
-          console.log('err: ', err);
-          // there was an error
-        }
-      );
+    this.setState(prevState => {
+      return { imageURL: prevState.input };
+    });
+
+    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then(
+      function(response) {
+        console.log(
+          'response: ',
+          response.outputs[0].data.regions[0].region_info.bounding_box
+        );
+        // do something with response
+      },
+      function(err) {
+        console.log('err: ', err);
+        // there was an error
+      }
+    );
   };
 
   render() {
