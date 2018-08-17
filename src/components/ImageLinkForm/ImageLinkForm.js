@@ -1,9 +1,9 @@
 import React from 'react';
 import './ImageLinkForm.css';
 
-const ImageLink = ({ onInputChange, onButtonSubmit }) => {
+const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
   return (
-    <div className="">
+    <div className="ImageLinkForm">
       <p className="f3">
         {'This magic brain will detect faces in your pictures. Give it a try.'}
       </p>
@@ -26,4 +26,4 @@ const ImageLink = ({ onInputChange, onButtonSubmit }) => {
   );
 };
 
-export default ImageLink;
+export default ImageLinkForm;

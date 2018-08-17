@@ -7,6 +7,7 @@ import Rank from './components/Rank/Rank';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import clarifaiApiKey from './config/clarifai';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 
 const app = new Clarifai.App({
   apiKey: clarifaiApiKey
@@ -26,21 +27,20 @@ const particleOptions = {
 
 class App extends Component {
   state = {
-    input: ''
+    input: '',
+    imageURL: ''
   };
 
   onInputChange = event => {
-    console.log('event: ', event);
-    console.log('event.target: ', event.target);
-    console.log('event.target.value: ', event.target.value);
+    this.setState({ input: event.target.value });
   };
 
   onButtonSubmit = () => {
-    console.log('Detect button clicked!');
+    this.setState({ imageURL: this.state.input });
     app.models
       .predict(
-        'a403429f2ddf4b49b307e318f00e528b',
-        'https://samples.clarifai.com/face-det.jpg'
+        Clarifai.COLOR_MODEL,
+        'https://static.photocdn.pt/images/articles/2017/03/15/iStock-539001578.jpg'
       )
       .then(
         function(response) {
@@ -65,7 +65,7 @@ class App extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
-        {/* <FaceRecognition /> */}
+        <FaceRecognition imageURL={this.state.imageURL} />
       </div>
     );
   }
