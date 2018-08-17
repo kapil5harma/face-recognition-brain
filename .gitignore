@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 /foo.txt
 /src/config/clarifai.js
+/src/config/clarifai.dev.js
