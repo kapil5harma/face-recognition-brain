@@ -1,1 +1,2 @@
 foo.txt
+src/config/clarifai.js
