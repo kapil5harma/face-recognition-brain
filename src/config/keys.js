@@ -1,5 +1,11 @@
+import clarifaiApiKeyProd from './clarifai.prod';
+import clarifaiApiKeyDev from './clarifai.dev';
+
+let clarifaiApiKey;
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./clarifai.prod');
+  clarifaiApiKey = clarifaiApiKeyProd;
 } else {
-  module.exports = require('./clarifai.dev');
+  clarifaiApiKey = clarifaiApiKeyDev;
 }
+
+export default clarifaiApiKey;
