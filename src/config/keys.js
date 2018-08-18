@@ -1,5 +1,5 @@
 import clarifaiApiKeyProd from './clarifai.prod';
-import clarifaiApiKeyDev from './clarifai.dev';
+// import clarifaiApiKeyDev from './clarifai.dev';
 
 let clarifaiApiKey;
 
@@ -10,7 +10,7 @@ console.log('process.env.CLARIFAI_KEY: ', process.env.CLARIFAI_KEY);
 if (process.env.NODE_ENV === 'production') {
   clarifaiApiKey = clarifaiApiKeyProd;
 } else {
-  clarifaiApiKey = clarifaiApiKeyDev;
+  // clarifaiApiKey = clarifaiApiKeyDev;
 }
 
 export default clarifaiApiKey;
