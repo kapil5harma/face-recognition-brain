@@ -10,6 +10,7 @@ import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import clarifaiApiKey from './config/keys';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 
 const app = new Clarifai.App({
   apiKey: clarifaiApiKey
@@ -32,7 +33,8 @@ class App extends Component {
     input: '',
     imageURL: '',
     box: {},
-    route: 'signin'
+    route: 'signin',
+    isSignedIn: false
   };
 
   calculateFaceLocation = data => {
@@ -72,17 +74,25 @@ class App extends Component {
   };
 
   onRouteChange = route => {
+    if (route === 'signout') {
+      this.setState({ isSignedIn: false });
+    } else if (route === 'home') {
+      this.setState({ isSignedIn: true });
+    }
     this.setState({ route: route });
   };
 
   render() {
+    const { isSignedIn, imageURL, box, route } = this.state;
+
     return (
       <div className="App">
         <Particles className="particles" params={particleOptions} />
-        <Navigation onRouteChange={this.onRouteChange} />
-        {this.state.route === 'signin' ? (
-          <SignIn onRouteChange={this.onRouteChange} />
-        ) : (
+        <Navigation
+          isSignedIn={isSignedIn}
+          onRouteChange={this.onRouteChange}
+        />
+        {route === 'home' ? (
           <React.Fragment>
             <Logo />
             <Rank />
@@ -90,13 +100,14 @@ class App extends Component {
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
             />
-            {this.state.imageURL ? (
-              <FaceRecognition
-                imageURL={this.state.imageURL}
-                box={this.state.box}
-              />
+            {imageURL ? (
+              <FaceRecognition imageURL={imageURL} box={box} />
             ) : null}
           </React.Fragment>
+        ) : route === 'signin' ? (
+          <SignIn onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
         )}
       </div>
     );
