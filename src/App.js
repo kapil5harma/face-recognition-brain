@@ -9,6 +9,7 @@ import Clarifai from 'clarifai';
 
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import clarifaiApiKey from './config/keys';
+import SignIn from './components/SignIn/SignIn';
 
 const app = new Clarifai.App({
   apiKey: clarifaiApiKey
@@ -30,7 +31,8 @@ class App extends Component {
   state = {
     input: '',
     imageURL: '',
-    box: {}
+    box: {},
+    route: 'signin'
   };
 
   calculateFaceLocation = data => {
@@ -69,23 +71,33 @@ class App extends Component {
       .catch(err => console.log('err: ', err));
   };
 
+  onRouteChange = route => {
+    this.setState({ route: route });
+  };
+
   render() {
     return (
       <div className="App">
         <Particles className="particles" params={particleOptions} />
-        <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit}
-        />
-        {this.state.imageURL ? (
-          <FaceRecognition
-            imageURL={this.state.imageURL}
-            box={this.state.box}
-          />
-        ) : null}
+        <Navigation onRouteChange={this.onRouteChange} />
+        {this.state.route === 'signin' ? (
+          <SignIn onRouteChange={this.onRouteChange} />
+        ) : (
+          <React.Fragment>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit}
+            />
+            {this.state.imageURL ? (
+              <FaceRecognition
+                imageURL={this.state.imageURL}
+                box={this.state.box}
+              />
+            ) : null}
+          </React.Fragment>
+        )}
       </div>
     );
   }
