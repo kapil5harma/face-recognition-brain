@@ -20,7 +20,7 @@ class Register extends Component {
   };
 
   onRegister = () => {
-    console.log('[SignIn.js]\nthis.state: ', this.state);
+    // console.log('[SignIn.js]\nthis.state: ', this.state);
     fetch('http://localhost:3001/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
