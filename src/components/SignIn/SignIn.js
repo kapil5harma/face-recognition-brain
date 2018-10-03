@@ -15,7 +15,7 @@ class SignIn extends Component {
   };
 
   onSubmitSignin = () => {
-    console.log('[SignIn.js]\nthis.state: ', this.state);
+    // console.log('[SignIn.js]\nthis.state: ', this.state);
     fetch('http://localhost:3001/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
