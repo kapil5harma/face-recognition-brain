@@ -15,7 +15,6 @@ class SignIn extends Component {
   };
 
   onSubmitSignin = () => {
-    // console.log('[SignIn.js]\nthis.state: ', this.state);
     fetch('http://localhost:3001/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -24,13 +23,6 @@ class SignIn extends Component {
         password: this.state.signInPassword
       })
     })
-      // .then(response =>
-      //   response.json().then(data => {
-      //     if (data === 'Success') {
-      //       this.props.onRouteChange('home');
-      //     }
-      //   })
-      // );
       .then(response => response.json())
       .then(user => {
         if (user.id) {
