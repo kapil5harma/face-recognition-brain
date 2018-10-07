@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
+
+import Particles from 'react-particles-js';
+import Clarifai from 'clarifai';
+import clarifaiApiKey from './config/keys';
+
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
-import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
-
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import clarifaiApiKey from './config/keys';
-import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import SignIn from './components/SignIn/SignIn';
 
 const app = new Clarifai.App({
   apiKey: clarifaiApiKey
@@ -28,21 +29,23 @@ const particleOptions = {
   }
 };
 
+const initialState = {
+  input: '',
+  imageURL: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
+};
+
 class App extends Component {
-  state = {
-    input: '',
-    imageURL: '',
-    box: {},
-    route: 'signin',
-    isSignedIn: false,
-    user: {
-      id: '',
-      name: '',
-      email: '',
-      entries: 0,
-      joined: ''
-    }
-  };
+  state = initialState;
 
   loadUser = data => {
     this.setState({
@@ -114,7 +117,7 @@ class App extends Component {
 
   onRouteChange = route => {
     if (route === 'signout') {
-      this.setState({ isSignedIn: false });
+      this.setState(initialState);
     } else if (route === 'home') {
       this.setState({ isSignedIn: true });
     }
@@ -134,7 +137,6 @@ class App extends Component {
         {route === 'home' ? (
           <React.Fragment>
             <Logo />
-            {/* <Rank /> */}
             <Rank
               name={this.state.user.name}
               entries={this.state.user.entries}
