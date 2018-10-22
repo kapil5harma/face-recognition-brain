@@ -53,7 +53,7 @@ class App extends Component {
   };
 
   // componentDidMount = () => {
-  //   fetch('http://localhost:3001/').then(response =>
+  //   fetch('https://face-recognition-brain-backend.herokuapp.com/').then(response =>
   //     response.json().then(data => console.log('data: ', data))
   //   );
   // };
@@ -86,7 +86,7 @@ class App extends Component {
       return { imageURL: prevState.input };
     });
 
-    fetch('http://localhost:3001/imageurl', {
+    fetch('https://face-recognition-brain-backend.herokuapp.com/imageurl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -96,7 +96,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('http://localhost:3001/image', {
+          fetch('https://face-recognition-brain-backend.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

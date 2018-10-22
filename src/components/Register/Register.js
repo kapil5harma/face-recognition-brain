@@ -20,7 +20,7 @@ class Register extends Component {
   };
 
   onRegister = () => {
-    fetch('http://localhost:3001/register', {
+    fetch('https://face-recognition-brain-backend.herokuapp.com/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
