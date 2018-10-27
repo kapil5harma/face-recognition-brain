@@ -52,12 +52,6 @@ class App extends Component {
     });
   };
 
-  // componentDidMount = () => {
-  //   fetch('https://face-recognition-brain-backend.herokuapp.com/').then(response =>
-  //     response.json().then(data => console.log('data: ', data))
-  //   );
-  // };
-
   calculateFaceLocation = data => {
     const clarifaiFace =
       data.outputs[0].data.regions[0].region_info.bounding_box;
