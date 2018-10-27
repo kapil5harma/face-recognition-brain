@@ -34,6 +34,8 @@ class SignIn extends Component {
 
   render() {
     const { onRouteChange } = this.props;
+    const { onEmailChange, onPasswordChange, onSubmitSignin } = this;
+
     return (
       <div className="SignIn">
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -47,7 +49,7 @@ class SignIn extends Component {
                   </label>
                   <input
                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                    onChange={this.onEmailChange}
+                    onChange={onEmailChange}
                     type="email"
                     name="email-address"
                     id="email-address"
@@ -59,7 +61,7 @@ class SignIn extends Component {
                   </label>
                   <input
                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                    onChange={this.onPasswordChange}
+                    onChange={onPasswordChange}
                     type="password"
                     name="password"
                     id="password"
@@ -72,7 +74,7 @@ class SignIn extends Component {
                   type="submit"
                   value="Sign in"
                   // onClick={() => onRouteChange('home')}
-                  onClick={this.onSubmitSignin}
+                  onClick={onSubmitSignin}
                 />
               </div>
               <div className="lh-copy mt3">
